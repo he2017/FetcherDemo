@@ -87,10 +87,36 @@ def extractMeta(html):
 '''
 提取文本
 '''
-def strip_tags(html):  
+def strip_tags(html): 
+    html = html.replace('\\', '') 
     result = ['']  
     parser = HTMLParser()  
     parser.handle_data = result.append  
     parser.feed(html)  
     parser.close()  
     return ''.join(result).strip() 
+
+'''
+提取微博内容
+'''
+def extractWeiboContent(html):
+    weibos = []
+    html = html.decode('unicode-escape')
+    #1. 提取每个微博内容区域正则表达式
+    reg = r'<div class=\"content clearfix\" node-type=\"like\">(.*?)<div node-type=\"feed_list_repeat\"'
+    itemList = re.findall(reg, html, re.S|re.M|re.U) # 匹配多行
+    for item in itemList: #遍历提取到的每个微博区域
+        weibo = {}
+        #2. 提取微博作者和微博内容
+        textReg = r'<p class=\"comment_txt\" (.*?) nick-name=\"(.*?)\">(.*?)<\\/p>'
+        texts = re.findall(textReg, item, re.S|re.M|re.U)
+        if texts and len(texts) > 0:
+            weibo['author'] = texts[0][1] #第二个下标是微博作者
+            weibo['text'] = strip_tags(texts[0][2]) #第三个下标是微博内容
+        #3. 提取微博发布时间
+        dateReg = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}'
+        dates = re.findall(dateReg, item, re.S|re.M|re.U)
+        if dates and len(dates) > 0:
+            weibo['pubTime'] = dates[0]
+        weibos.append(weibo)
+    return weibos

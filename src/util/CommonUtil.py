@@ -17,3 +17,4 @@ def getUrlSum(url):
         url_md5.update(url)   
         urlSum = url_md5.hexdigest()   
     return urlSum
+
