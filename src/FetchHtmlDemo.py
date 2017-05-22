@@ -5,9 +5,7 @@ Created on 2017年5月21日
 
 @author: tony
 '''
-from util import CommonUtil
-from util import MysqlUtil
-from util import FetcherUtil
+from util import CommonUtil, MysqlUtil, FetcherUtil
 
 if __name__ == '__main__':
     #1. 第一步一个url变量

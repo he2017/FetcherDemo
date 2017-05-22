@@ -5,8 +5,7 @@ Created on 2017年5月21日
 
 @author: tony
 '''
-from util import FetcherUtil
-from util import HtmlExtract
+from util import FetcherUtil, HtmlExtract
 
     
 if __name__ == '__main__':
