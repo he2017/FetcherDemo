@@ -7,10 +7,13 @@ Created on 2017年5月21日
 '''
 from util import CommonUtil, FileUtil, FetcherUtil, MysqlUtil, HtmlExtract
 
+'''
+简单的通过cookie抓取微博搜索结果
+'''
 if __name__ == '__main__':
     #1. 初始化变量
     url = 'http://s.weibo.com/weibo/%25E4%25BA%25AC%25E4%25B8%259C&b=1&page=1'
-    cookie_str = 'SINAGLOBAL=2204125497955.829.1485329104913; wvr=6; SSOLoginState=1495468461; SCF=Ah6FvK5u7EHN9tYhyolKNjlJFG4syHY2CW9__5jrTG_wHyAoTL3gmf4f7mF53Ds5memByMPu2qKaFqGwTTzI2_A.; SUB=_2A250J3n1DeThGeNI6VQV-SbJzD2IHXVXVew9rDV8PUNbmtANLUOjkW9oz_7t0I2S-F0znDPC68thLLDiRA..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFv6clAKgcmksgpb_WU.yRA5JpX5KMhUgL.Fo-ceoqX1KnfS022dJLoI7LQ9Hv3Ug4N9g.t; SUHB=0YhB01PSEu8a54; ALF=1527004461; SWB=usrmdinst_12; _s_tentry=login.sina.com.cn; Apache=6693871708121.15.1495468465585; ULV=1495468465626:54:11:2:6693871708121.15.1495468465585:1495344744894; UOR=,,login.sina.com.cn; WBStorage=02e13baf68409715|undefined'
+    cookie_str = '这里填写自己的微博账号cookie'
     #2. 首先从Mysql中获取快照
     urlSum = CommonUtil.getUrlSum(url)
     html = MysqlUtil.getHtml(urlSum)
