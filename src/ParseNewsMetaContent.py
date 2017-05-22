@@ -27,10 +27,10 @@ if __name__ == '__main__':
         #5. 提取新闻的标题、作者、发布时间、内容
         detail = HtmlExtract.extractMeta(html)
         if detail:
-            print "标题:", detail['title']
-            print "作者:", detail['author']
-            print "发布时间:", detail['pubTime']
-            print "内容:", detail['content']
+            print "标题:".decode("UTF-8"), detail['title']
+            print "作者:".decode("UTF-8"), detail['author']
+            print "发布时间:".decode("UTF-8"), detail['pubTime']
+            print "内容:".decode("UTF-8"), detail['content']
             #6. 保存解析的新闻内容到Mysql中
             if MysqlUtil.saveNewsContent(meta['url'], 
                                          meta['urlSum'], 

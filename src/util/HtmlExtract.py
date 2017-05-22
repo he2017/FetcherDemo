@@ -7,6 +7,9 @@ Created on 2017年5月21日
 ''' 
 from HTMLParser import HTMLParser
 import re
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''    
 提取链接，返回一个链接数组

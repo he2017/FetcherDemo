@@ -8,6 +8,9 @@ Created on 2017年5月21日
 import httplib
 import urllib
 import urlparse
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''
 抓取网页

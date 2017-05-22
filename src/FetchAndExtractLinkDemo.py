@@ -6,7 +6,9 @@ Created on 2017年5月21日
 @author: tony
 '''
 from util import FetcherUtil, HtmlExtract
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
     
 if __name__ == '__main__':
     #1. 第一步一个url变量

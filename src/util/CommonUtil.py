@@ -6,6 +6,13 @@ Created on 2017年5月21日
 @author: tony
 '''
 import md5
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+UTF_8 = "UTF-8"
+GB18030 = "GB18030"
+GBK = "GBK"
 
 '''
 将url链接转换成md5加密的32位唯一字符串

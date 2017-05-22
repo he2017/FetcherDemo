@@ -1,25 +1,30 @@
-# -*- coding: utf-8 -*-
-# ç¬¬ä¸€è¡ŒåŠ è¿™ä¸ªåï¼Œå°±å¯ä»¥åŠ ä¸­æ–‡æ³¨é‡Šäº†
+# -*- coding: GB18030 -*-
+# µÚÒ»ĞĞ¼ÓÕâ¸öºó£¬¾Í¿ÉÒÔ¼ÓÖĞÎÄ×¢ÊÍÁË
 '''
-Created on 2017å¹´5æœˆ21æ—¥
+Created on 2017Äê5ÔÂ21ÈÕ
 
 @author: tony
 '''
 from util import CommonUtil, MysqlUtil, FetcherUtil
+import sys
+reload(sys)
+sys.setdefaultencoding(CommonUtil.GB18030)
 
 if __name__ == '__main__':
-    #1. ç¬¬ä¸€æ­¥ä¸€ä¸ªurlå˜é‡
+    #1. µÚÒ»²½Ò»¸öurl±äÁ¿
     url = 'https://www.douban.com/'
-    #2. ç¬¬äºŒæ­¥æŠ“å–ç½‘é¡µå†…å®¹
-    html = FetcherUtil.fetchHtml(url) 
-    #3. å°†ç½‘é¡µå†…å®¹å­˜å‚¨åˆ°DB
-    urlSum = CommonUtil.getUrlSum(url)#å°†urlè½¬æˆå›ºå®šé•¿åº¦çš„md5å­—ç¬¦ä¸²
-    result = MysqlUtil.saveHtml(urlSum, url, html)
-    if result:
-        print 'ä¿å­˜ç½‘é¡µæˆåŠŸ'
-    else:
-        print 'ä¿å­˜ç½‘é¡µå¤±è´¥'
+    urlSum = CommonUtil.getUrlSum(url)#½«url×ª³É¹Ì¶¨³¤¶ÈµÄmd5×Ö·û´®
+    #2. µÚ¶ş²½´ÓÊı¾İ¿âÖĞ»ñÈ¡¿ìÕÕ
     html = MysqlUtil.getHtml(urlSum)
+    if not html:
+        #3. µÚÈı²½Êı¾İ¿âÖĞ²»´æÔÚÔò´ÓÍøÉÏÊµÊ±×¥È¡
+        html = FetcherUtil.fetchHtml(url) 
+        #4. ½«ÍøÒ³ÄÚÈİ´æ´¢µ½DB
+        result = MysqlUtil.saveHtml(urlSum, url, html)
+        if result:
+            print '±£´æÍøÒ³³É¹¦'.decode(CommonUtil.GB18030)
+        else:
+            print '±£´æÍøÒ³Ê§°Ü'.decode(CommonUtil.GB18030)
     if(html):
-        print html.decode("utf-8")
+        print html.encode(CommonUtil.GB18030)
     

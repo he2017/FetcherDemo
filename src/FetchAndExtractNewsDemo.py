@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding:utf-8 -*-  
 # 第一行加这个后，就可以加中文注释了
 '''
 Created on 2017年5月21日
@@ -6,7 +6,9 @@ Created on 2017年5月21日
 @author: tony
 '''
 from util import FetcherUtil, HtmlExtract
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
     
 if __name__ == '__main__':
     #1. 第一步一个url变量
@@ -17,4 +19,4 @@ if __name__ == '__main__':
     news = HtmlExtract.extractDoubanNews(html)
     #4. 第四步输出提取到的链接和标题
     for item in news:
-        print '链接:', item[0], '标题:', item[1]
+        print '链接:'.decode("UTF-8"), item[0].decode("UTF-8"), '标题:'.decode("UTF-8"), item[1].decode("UTF-8")

@@ -7,6 +7,9 @@ Created on 2017年5月21日
 '''
 
 import MySQLdb
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''
 创建数据库链接
@@ -73,8 +76,8 @@ def testInsertData(data):
 '''
 def displayData(data):
     for record in data:
-        print 'ID:', record['id'], '链接:', record['url'], '标题:', record['title']
-    print '查询到%s条记录'%(len(data))
+        print 'ID:'.decode("UTF-8"), record['id'], '链接:'.decode("UTF-8"), record['url'], '标题:'.decode("UTF-8"), record['title']
+    print '查询到%s条记录'.decode("UTF-8")%(len(data))
 
 def getInitData():
     data = []

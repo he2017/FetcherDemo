@@ -7,6 +7,9 @@ Created on 2017年5月21日
 '''
 
 import MySQLdb
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''
 创建数据库链接

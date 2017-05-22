@@ -6,7 +6,9 @@ Created on 2017年5月21日
 @author: tony
 '''
 from util import FetcherUtil, CommonUtil, HtmlExtract, MysqlUtil
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
     
 if __name__ == '__main__':
     #1. 第一步一个url变量
@@ -17,7 +19,7 @@ if __name__ == '__main__':
     news = HtmlExtract.extractDoubanNews(html)
     #4. 第四步输出提取到的链接和标题，并保存到数据库中
     for item in news:
-        print '链接:', item[0], '标题:', item[1]
+        print '链接:'.decode("UTF-8"), item[0].decode("UTF-8"), '标题:'.decode("UTF-8"), item[1].decode("UTF-8")
         urlSum = CommonUtil.getUrlSum(item[0])#将url转成固定长度的md5字符串
         MysqlUtil.saveNewsMeta(item[0], urlSum, item[1])
         

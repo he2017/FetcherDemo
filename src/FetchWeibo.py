@@ -1,39 +1,42 @@
-# -*- coding: utf-8 -*-
-# ç¬¬ä¸€è¡ŒåŠ è¿™ä¸ªåï¼Œå°±å¯ä»¥åŠ ä¸­æ–‡æ³¨é‡Šäº†
+# -*- coding: GB18030 -*-
+# µÚÒ»ĞĞ¼ÓÕâ¸öºó£¬¾Í¿ÉÒÔ¼ÓÖĞÎÄ×¢ÊÍÁË
 '''
-Created on 2017å¹´5æœˆ21æ—¥
+Created on 2017Äê5ÔÂ21ÈÕ
 
 @author: tony
 '''
 from util import CommonUtil, FileUtil, FetcherUtil, MysqlUtil, HtmlExtract
+import sys
+reload(sys)
+sys.setdefaultencoding(CommonUtil.GB18030)
 
 '''
-ç®€å•çš„é€šè¿‡cookieæŠ“å–å¾®åšæœç´¢ç»“æœ
+¼òµ¥µÄÍ¨¹ıcookie×¥È¡Î¢²©ËÑË÷½á¹û
 '''
 if __name__ == '__main__':
-    #1. åˆå§‹åŒ–å˜é‡
+    #1. ³õÊ¼»¯±äÁ¿
     url = 'http://s.weibo.com/weibo/%25E4%25BA%25AC%25E4%25B8%259C&b=1&page=1'
-    cookie_str = 'è¿™é‡Œå¡«å†™è‡ªå·±çš„å¾®åšè´¦å·cookie'
-    #2. é¦–å…ˆä»Mysqlä¸­è·å–å¿«ç…§
+    cookie_str = 'ÕâÀïÌîĞ´×Ô¼ºµÄÎ¢²©ÕËºÅcookie'
+    #2. Ê×ÏÈ´ÓMysqlÖĞ»ñÈ¡¿ìÕÕ
     urlSum = CommonUtil.getUrlSum(url)
     html = MysqlUtil.getHtml(urlSum)
-    #3. å¦‚æœMysqlæ²¡æœ‰å¿«ç…§ï¼Œåˆ™å®æ—¶çš„ä»ç½‘ä¸ŠæŠ“å–å¿«ç…§
+    #3. Èç¹ûMysqlÃ»ÓĞ¿ìÕÕ£¬ÔòÊµÊ±µÄ´ÓÍøÉÏ×¥È¡¿ìÕÕ
     if not html:
         html = FetcherUtil.fetchWeibo(url, cookie_str)
-        result = MysqlUtil.saveHtml(urlSum, url, html) #æŠ“å–ç‹å¿«ç…§åå­˜å‚¨æœ¬åœ°Mysqlä¸­
+        result = MysqlUtil.saveHtml(urlSum, url, html) #×¥È¡Íõ¿ìÕÕºó´æ´¢±¾µØMysqlÖĞ
         if result:
-            print 'ä¿å­˜å¾®åšå¿«ç…§æˆåŠŸ'
+            print '±£´æÎ¢²©¿ìÕÕ³É¹¦'
         else:
-            print 'ä¿å­˜å¾®åšå¿«ç…§å¤±è´¥'
+            print '±£´æÎ¢²©¿ìÕÕÊ§°Ü'
     
-    FileUtil.writeLine("weibo.html", html) #ä¿å­˜å¿«ç…§åˆ°ä¸´æ—¶æ–‡ä»¶ä¸­
-    #4. ä»htmlå¿«ç…§ä¸­æå–ç»“æ„åŒ–çš„å¾®åšå†…å®¹
+    FileUtil.writeLine("weibo.html", html) #±£´æ¿ìÕÕµ½ÁÙÊ±ÎÄ¼şÖĞ
+    #4. ´Óhtml¿ìÕÕÖĞÌáÈ¡½á¹¹»¯µÄÎ¢²©ÄÚÈİ
     weiboDatas = HtmlExtract.extractWeiboContent(html) 
-    #5. è¾“å…¥æå–åˆ°çš„å¾®åšç»“æ„åŒ–å†…å®¹
+    #5. ÊäÈëÌáÈ¡µ½µÄÎ¢²©½á¹¹»¯ÄÚÈİ
     for weiboData in weiboDatas:
-        print 'ä½œè€…:', weiboData['author']
-        print 'å‘å¸ƒæ—¶é—´:', weiboData['pubTime']
-        print 'å†…å®¹:', weiboData['text']
+        print '×÷Õß:'.decode(CommonUtil.GB18030), weiboData['author']
+        print '·¢²¼Ê±¼ä:'.decode(CommonUtil.GB18030), weiboData['pubTime']
+        print 'ÄÚÈİ:'.decode(CommonUtil.GB18030), weiboData['text'].encode(CommonUtil.GB18030)
         print ''
-    print 'æ‰¾åˆ°', len(weiboDatas), 'æ¡å¾®åš'
-    #6. å­˜å‚¨åˆ°Mysqlä¸­
+    print 'ÕÒµ½'.decode(CommonUtil.GB18030), len(weiboDatas), 'ÌõÎ¢²©'.decode(CommonUtil.GB18030)
+    #6. ´æ´¢µ½MysqlÖĞ

@@ -6,6 +6,9 @@ Created on 2017年5月21日
 @author: tony
 '''
 from util import FetcherUtil, MysqlUtil
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''
 1. 从数据库中获取newsmeta信息

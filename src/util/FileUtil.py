@@ -5,6 +5,9 @@ Created on 2017年5月21日
 
 @author: tony
 '''
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''
 将文本保存到指定的文件中
