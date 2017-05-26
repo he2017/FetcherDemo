@@ -69,6 +69,7 @@ def testInsertData(data):
         cur.close() #关闭游标
         conn.close() #关闭连接
     except MySQLdb.Error,e:
+        conn.rollback()
         print "Mysql Error %d: %s" % (e.args[0], e.args[1])
     
 '''
